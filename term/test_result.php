@@ -8,7 +8,7 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] != 'professor') {
 }
 
 $professor_id = isset($_SESSION['id']) ? $_SESSION['id'] : 'default_id';
-$sql = "SELECT course_id, course_name FROM courses WHERE professor_id = :professor_id";
+$sql = "SELECT course_id, course_name FROM courses WHERE professor_id = :professor_id AND course_date = '2024-1' or course_date = '2024-2'";
 $stmt = oci_parse($conn, $sql);
 oci_bind_by_name($stmt, ":professor_id", $professor_id);
 oci_execute($stmt);
@@ -347,12 +347,12 @@ if ($conn) {
         <div class="sidebar">
             <div style="width: 100%; text-align:center;">
                 <h1>6팀</h1>
-                <h3>학적 관리 시스템</h3>
+                <h3>성적 및 시험 관리 시스템</h3>
             </div>
             <ul>
                 <li><a href="professor_main.php">메인페이지</a></li>
-                <li><a href="#">수강 관리</a></li>
-                <li><a href="#">학생 관리</a></li>
+                <li><a href="professor_courselist241.php">수강 관리</a></li>
+                <li><a href="profile.php">개인정보 관리</a></li>
                 <li class="dropdown">
                     <a href="javascript:void(0);" class="dropbtn dropdown-active" onclick="toggleDropdown()">시험 관리 &#9662;</a> <!-- 드롭다운 메뉴가 기본적으로 활성화된 상태로 설정 -->
                     <ul class="dropdown-content">
@@ -382,12 +382,12 @@ if ($conn) {
                     <?php endif; ?>
                 </select>
                 <label for="date">날짜 선택:</label>
-                <input type="date" id="date" name="answer_date" required>
+                <input style="width: 97.5%;" type="date" id="date" name="answer_date" required>
                 <button type="submit">조회</button>
             </form>
 
             <div>
-                <h3>시험 날짜: <?= htmlspecialchars($answer_date); ?></h3>
+                <h3>시험 날짜: <?= htmlspecialchars($answer_date);  ?></h3>
             </div>
 
             <?php if (!empty($results)) : ?>

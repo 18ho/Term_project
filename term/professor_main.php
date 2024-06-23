@@ -244,12 +244,12 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] != 'professor') {
         <div class="sidebar">
             <div style="width: 100%; text-align:center;">
                 <h1>6팀</h1>
-                <h3>학적 관리 시스템</h3>
+                <h3>성적 및 시험 관리 시스템</h3>
             </div>
             <ul>
                 <li><a href="professor_main.php" class="active">메인페이지</a></li>
-                <li><a href="#">수강 관리</a></li>
-                <li><a href="#">학생 관리</a></li>
+                <li><a href="professor_courselist241.php">수강 관리</a></li>
+                <li><a href="profile.php">개인정보 관리</a></li>
                 <li class="dropdown">
                     <a href="javascript:void(0);" class="dropbtn" onclick="toggleDropdown()">시험 관리 &#9662;</a>
                     <ul class="dropdown-content">
@@ -268,7 +268,7 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] != 'professor') {
                 <a href="logout.php" class="logout-button">로그아웃</a>
             </div>
             <div class="info-container active" id="info1">
-                텀 프로젝트 - 학적 관리 시스템
+                텀 프로젝트 - 성적 및 시험 관리 시스템
             </div>
             <div class="info-container" id="info2">
                 6팀 - 정현호, 장익제, 이조운

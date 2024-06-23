@@ -8,7 +8,7 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] != 'professor') {
 }
 
 $professor_id = isset($_SESSION['id']) ? $_SESSION['id'] : 'default_id';
-$sql = "SELECT course_id, course_name FROM courses WHERE professor_id = :professor_id";
+$sql = "SELECT course_id, course_name FROM courses WHERE professor_id = :professor_id AND course_date = '2024-1' or course_date = '2024-2'" ;
 $stmt = oci_parse($conn, $sql);
 oci_bind_by_name($stmt, ":professor_id", $professor_id);
 oci_execute($stmt);
@@ -21,10 +21,11 @@ oci_free_statement($stmt);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_FILES['file'])) {
-        // CSV 파일 업로드 처리
+        // CSV 파일 업로드
         $file = $_FILES['file']['tmp_name'];
         $handle = fopen($file, 'r');
-        fgetcsv($handle, 1000, ','); // 첫 행 건너뛰기
+        // 첫 행 건너뛰기
+        fgetcsv($handle, 1000, ',');
 
         $course_id = $_POST['course_id'];
         $answer_date = $_POST['answer_date'];
@@ -156,9 +157,7 @@ if ($conn) {
 
         .dropdown-content {
             display: block;
-            /* 드롭다운 메뉴가 기본적으로 펼쳐지도록 설정 */
             padding-left: 20px;
-            /* 드롭다운 메뉴의 패딩 조정 */
         }
 
         .dropdown-content a {
@@ -201,7 +200,6 @@ if ($conn) {
         input[type="text"],
         button {
             width: calc(100% - 16px);
-            /* 패딩 값을 제외한 전체 너비 */
             padding: 8px;
             margin-top: 5px;
         }
@@ -343,12 +341,12 @@ if ($conn) {
         <div class="sidebar">
             <div style="width: 100%; text-align:center;">
                 <h1>6팀</h1>
-                <h3>학적 관리 시스템</h3>
+                <h3>성적 및 시험 관리 시스템</h3>
             </div>
             <ul>
                 <li><a href="professor_main.php">메인페이지</a></li>
-                <li><a href="#">수강 관리</a></li>
-                <li><a href="#">학생 관리</a></li>
+                <li><a href="professor_courselist241.php">수강 관리</a></li>
+                <li><a href="profile.php">개인정보 관리</a></li>
                 <li class="dropdown">
                     <a href="javascript:void(0);" class="dropbtn dropdown-active" onclick="toggleDropdown()">시험 관리 &#9662;</a> <!-- 드롭다운 메뉴가 기본적으로 활성화된 상태로 설정 -->
                     <ul class="dropdown-content">
@@ -379,7 +377,7 @@ if ($conn) {
                     <?php endif; ?>
                 </select>
                 <label for="date">날짜 선택:</label>
-                <input style="width: 97%" type="date" id="date" name="answer_date" required>
+                <input style="width: 97.5%" type="date" id="date" name="answer_date" required>
                 <table class="answers-table">
                     <tr>
                         <th>문제</th>
@@ -416,7 +414,7 @@ if ($conn) {
                     <?php endif; ?>
                 </select>
                 <label for="date">날짜 선택:</label>
-                <input style="width: 97%" type="date" id="date" name="answer_date" required>
+                <input style="width: 97.5%" type="date" id="date" name="answer_date" required>
                 <label for="file">CSV 파일 업로드:</label>
                 <div class="file-drop-area">
                     <span class="file-msg">드래그 앤 드롭 하거나 클릭해서 파일 선택</span>

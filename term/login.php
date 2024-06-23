@@ -58,7 +58,7 @@ oci_close($conn);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>학적 관리 시스템 로그인</title>
+    <title>성적 및 시험 관리 시스템 로그인</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -78,12 +78,11 @@ oci_close($conn);
                 <button style="width:100%;" type="submit" class="login-button">로그인</button>
                 <div class="aDiv" style="width: 100%; text-align: left; font-size: 10px">
                     <a href="register.php">회원가입</a>
-                    <a href="#">비밀번호 찾기</a>
                 </div>
             </form>
         </div>
         <div class="login-info">
-            <p>아이디는 학번입니다</p>
+            <p>학생 아이디는 학번입니다</p>
         </div>
     </div>
 </body>
